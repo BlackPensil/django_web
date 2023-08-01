@@ -39,5 +39,8 @@ class Advertisement(models.Model):
         verbose_name='Дата редактирования'
     )
 
+    def __str__(self):
+        return f'id={self.id}, title={self.title}, description={self.description}, price={self.price}'
+
 
 
