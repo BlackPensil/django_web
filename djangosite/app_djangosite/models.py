@@ -7,7 +7,7 @@
 # created_at
 # updated_at
 from django.db import models
-class Advertisement(models.Model):
+class Advertisements(models.Model):
 
     title = models.CharField(
         max_length=100,
