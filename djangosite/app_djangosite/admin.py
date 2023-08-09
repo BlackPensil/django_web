@@ -4,18 +4,19 @@ from .models import Advertisements
 # Register your models here.
 
 class AdvertisementsAdmin(admin.ModelAdmin):
-    list_display = ['id', 'title', 'description', 'price', 'created_date', 'updated_date', 'auction']
+    list_display = ['id', 'title', 'description', 'price', 'created_date', 'updated_date', 'image', 'auction']
     list_filter = ['created_at', 'updated_at', 'auction']
     actions = ['make_auction_as_false', 'make_auction_as_true']
     fieldsets = (
         (
             'Общее', {
-                'fields': ('title', 'description'),
+                'fields': ('title', 'description', 'user', 'image'),
             }
         ),
         (
             'Финансы', {
-                'fields': ('price', 'auction')
+                'fields': ('price', 'auction'),
+                'classes': ['collapse']
             }
         )
     )

@@ -1,5 +1,5 @@
 # Create your models here.
-# Advertisement:
+# Advertisements:
 # title
 # description
 # price
@@ -10,6 +10,9 @@ from django.db import models
 from django.contrib import admin
 from django.utils import timezone
 from django.utils.html import format_html
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 class Advertisements(models.Model):
 
     title = models.CharField(
@@ -42,6 +45,17 @@ class Advertisements(models.Model):
         verbose_name='Дата редактирования'
     )
 
+    user = models.ForeignKey(
+        to=User,
+        verbose_name='пользователь',
+        on_delete=models.CASCADE
+    )
+
+    image = models.ImageField(
+        upload_to='advertisements/',
+        verbose_name='изображение',
+    )
+
     @admin.display(description='Дата создания')
     def created_date(self):
         if self.created_at.date() == timezone.now().date():
@@ -66,6 +80,3 @@ class Advertisements(models.Model):
 
     class Meta:
         pass
-
-
-
