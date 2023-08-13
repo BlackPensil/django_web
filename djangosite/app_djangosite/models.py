@@ -74,6 +74,15 @@ class Advertisements(models.Model):
             )
         return self.updated_at.strftime('%d.%m.%Y в %H:%M:%S')
 
+    @admin.display(description='Изображение')
+    def updated_image(self):
+        if self.image:
+            return format_html(
+                f'<img src="{self.image.url}" width="50" height="40" alt="Card title">'
+            )
+        return 'Нету'
+
+
 
     def __str__(self):
         return f'id={self.id}, title={self.title}, description={self.description}, price={self.price}'
