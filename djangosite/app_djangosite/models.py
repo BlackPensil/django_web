@@ -82,8 +82,6 @@ class Advertisements(models.Model):
             )
         return 'Нету'
 
-
-
     def __str__(self):
         return f'id={self.id}, title={self.title}, description={self.description}, price={self.price}'
 
