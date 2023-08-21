@@ -1,11 +1,3 @@
-# Create your models here.
-# Advertisements:
-# title
-# description
-# price
-# auction
-# created_at
-# updated_at
 from django.db import models
 from django.contrib import admin
 from django.utils import timezone

@@ -18,8 +18,7 @@ def advertisement_post(request):
             advertisement = Advertisements(**form.cleaned_data)
             advertisement.user = request.user
             advertisement.save()
-            url = reverse('main-page')
-            return redirect(url)
+            return redirect('main-page')
     else:
         form = AdvertisementForm()
     context = {'form': form}
