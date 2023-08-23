@@ -23,7 +23,8 @@ from .settings import MEDIA_URL, MEDIA_ROOT
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('app_djangosite.urls')),
-    path('lesson_4/', include('app_lesson_4.urls'))
+    path('lesson_4/', include('app_lesson_4.urls')),
+    path('myauth/', include('app_auth.urls')),
 ]
 
 if settings.DEBUG:

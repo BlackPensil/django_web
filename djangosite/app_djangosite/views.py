@@ -6,10 +6,10 @@ from .Forms import AdvertisementForm
 def index(request):
     advertisements = Advertisements.objects.all()
     context = {'advertisements': advertisements}
-    return render(request, 'index.html', context=context)
+    return render(request, 'app_djangosite/index.html', context=context)
 
 def top_sellers(request):
-    return render(request, 'top-sellers.html')
+    return render(request, 'app_djangosite/top-sellers.html')
 
 def advertisement_post(request):
     if request.method == 'POST':
@@ -22,4 +22,4 @@ def advertisement_post(request):
     else:
         form = AdvertisementForm()
     context = {'form': form}
-    return render(request, 'advertisement-post.html', context=context)
+    return render(request, 'app_djangosite/advertisement-post.html', context=context)
