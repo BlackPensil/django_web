@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from .models import Advertisements
 from .Forms import AdvertisementForm
 
+User = get_user_model()
 
 def advertisement_view(request, pk):
     advertisements = Advertisements.objects.get(pk=pk)
