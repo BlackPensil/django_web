@@ -1,5 +1,7 @@
 from django.shortcuts import render, reverse, redirect
 from django.contrib.auth import authenticate, login, logout
+from .Forms import MyUserCreationForm
+
 
 def profile_view(request):
     return render(request, 'app_auth/profile.html')
@@ -28,7 +30,17 @@ def login_view(request):
 
 
 def register_view(request):
-    return render(request, 'app_auth/register.html')
+    if request.method == 'POST':
+        form = MyUserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            user = authenticate(username=user.username, password=request.POST['password1'])
+            login(request, user=user)
+            return redirect(reverse('profile'))
+    else:
+        form = MyUserCreationForm()
+    context = {'form': form}
+    return render(request, 'app_auth/register.html', context=context)
 
 def logout_view(request):
     logout(request)

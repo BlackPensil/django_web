@@ -6,12 +6,12 @@
 {% block content %}
   <ul class="nav nav-pills sticky-top bg-white nav-fill">
     <li class="nav-item">
-      <a class="nav-link"  href="{% url 'main-page' %}">
+      <a class="nav-link" href="{% url 'main-page' %}">
         <span style="font-weight: bold;">Главная</span>
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link active" aria-current="page" href="{% url 'top-sellers' %}"><span style="font-weight: bold;">Топ продавцов</span>
+      <a class="nav-link active" href="{% url 'top-sellers' %}"><span style="font-weight: bold;">Топ продавцов</span>
       </a>
     </li>
     <li class="nav-item">
@@ -19,8 +19,9 @@
         <span style="font-weight: bold;">Разместить объявление</span>
       </a>
     </li>
+    {% if not user.is_authenticated %}
     <li class="nav-item">
-      <a class="nav-link" href="{% url 'register' %}">
+      <a class="nav-link" aria-current="page" href="{% url 'register' %}">
         <span style="font-weight: bold;">Регистрация</span>
       </a>
     </li>
@@ -39,6 +40,7 @@
         <span style="font-weight: bold;">Выйти</span>
       </a>
     </li>
+    {% endif %}
   </ul>
   <div class="row">
     <div class="col" style="margin: 50px;">
@@ -48,30 +50,17 @@
     </div>
   </div>
   <div class="container" style="min-height: 452px">
-    <ul class="list-group list-group-numbered">
-
-      <li class="list-group-item d-flex justify-content-between align-items-start">
-        <div class="ms-2 me-auto">
-          <div class="fw-bold">Ваня
+      <ul class="list-group list-group-numbered">
+        {% for user in users %}
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+          <div class="ms-2 me-auto">
+            <div class="fw-bold">{% user.username %}
+            </div>
           </div>
-        </div>
-        <span class="badge bg-primary rounded-pill">2</span>
-      </li>
-      <li class="list-group-item d-flex justify-content-between align-items-start">
-        <div class="ms-2 me-auto">
-          <div class="fw-bold">Петя
-          </div>
-        </div>
-        <span class="badge bg-primary rounded-pill">3</span>
-      </li>
-      <li class="list-group-item d-flex justify-content-between align-items-start">
-        <div class="ms-2 me-auto">
-          <div class="fw-bold">Гоша
-          </div>
-        </div>
-        <span class="badge bg-primary rounded-pill">3</span>
-      </li>
-    </ul>
+          <span class="badge bg-primary rounded-pill">{{ user.adv_count }}</span>
+        </li>
+        {% endfor %}
+      </ul>
   </div>
   <footer style="padding: 100px;" class="bg-primary">
     <nav class="navbar navbar-expand-sm navbar-dark">

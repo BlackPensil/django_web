@@ -1,15 +1,33 @@
 from django.shortcuts import render, reverse, redirect
+from django.contrib.auth import get_user_model
+from django.db.models import Count
 from django.http import HttpResponse
 from .models import Advertisements
 from .Forms import AdvertisementForm
 
+
+def advertisement_view(request, pk):
+    advertisements = Advertisements.objects.get(pk=pk)
+    context = {
+        'advertisements': advertisements
+    }
+    return render(request, 'app_djangosite/advertisement.html', context=context)
+
 def index(request):
-    advertisements = Advertisements.objects.all()
-    context = {'advertisements': advertisements}
+    title = request.GET.get('query')
+    if title:
+        advertisements = Advertisements.objects.filter(title__icontains=title)
+    else:
+        advertisements = Advertisements.objects.all()
+    context = {'advertisements': advertisements, 'title': title}
     return render(request, 'app_djangosite/index.html', context=context)
 
 def top_sellers(request):
-    return render(request, 'app_djangosite/top-sellers.html')
+    users = User.objects.annotate(
+        adv_count=Count('advertisements')
+    ).order_by('-adv_count')
+    context = {'users': users}
+    return render(request, 'app_djangosite/top-sellers.html', context=context)
 
 def advertisement_post(request):
     if request.method == 'POST':
