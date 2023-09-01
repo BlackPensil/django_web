@@ -13,7 +13,6 @@ class MyUserCreationForm(UserCreationForm):
         self.fields['first_name'].widget.attrs['class'] = 'form-control form-control-lg'
         self.fields['last_name'].widget.attrs['class'] = 'form-control form-control-lg'
 
-
     class Meta:
         model = User
         fields = ['username', 'password1', 'password2', 'first_name', 'last_name']
